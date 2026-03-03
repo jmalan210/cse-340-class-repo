@@ -27,6 +27,13 @@ app.set('view engine', 'ejs');
 // Tell Express where to find your templates
 app.set('views', path.join(__dirname, 'src/views'));
 
+app.use((req, res, next) => {
+    console.log(req.method, req.url);
+    res.locals.appName = 'Partner Portal';
+    res.locals.currentPath = req.path;
+    next();
+})
+
 /**
   * Routes
   */

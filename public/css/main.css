@@ -77,8 +77,10 @@ a:hover { color: var(--gold); }
 /* --- Navigation --- */
 nav {
   position: sticky; top: 0; z-index: 100;
-  background: var(--navy);
+  background: color-mix(in srgb, var(--navy) 85%, transparent);
+  background: rgba(11, 31, 58, 0.85);
   border-bottom: 1px solid rgba(255,255,255,0.12);
+  -webkit-backdrop-filter: blur(8px); 
   backdrop-filter: blur(8px);
 }
 nav ul {
@@ -105,6 +107,11 @@ nav a:focus-visible {
   color: var(--gold);
 }
 
+nav a.active {
+    font-weight: 700;
+    color: var(--teal);
+}
+
 
 /* --- Main area: soft surface so page isn’t stark black/white --- */
 main {
@@ -129,12 +136,33 @@ main {
 }
 
 /* --- Footer --- */
-footer {
+.site-footer {
   border-top: 1px solid var(--border);
-  padding: 16px;
+  padding: 24px 16px;
   background: #fff;
   color: var(--muted);
   text-align: center;
+  font-size: 0.95rem;
+}
+
+.site-footer[data-enhanced="true"] {
+    background: #fafafa;
+}
+
+.back-to-top {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--teal);
+    transition: background 140ms ease, color 140ms ease;
+}
+
+.back-to-top:hover, 
+.back-to-top:focus-visible {
+    background: rgba(10, 183, 167, 0.10);
+    outline: none;
 }
 
 /* ===== Organizations page: media-style list ===== */
