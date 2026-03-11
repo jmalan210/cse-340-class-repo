@@ -6,7 +6,7 @@
        <h2>Upcoming Service Projects</h2>
 <ul>
     <% service_projects.forEach(service_project => { %>
-        <li>
+        <li class="card">
             <strong><%= new Date(service_project.project_date).toLocaleDateString('en-US', {
                 month: 'long', 
                 day: 'numeric', 
