@@ -176,8 +176,8 @@ main > ul {
 }
 
 main > ul > li {
-  display: grid;
-  grid-template-columns: auto 1fr;  /* logo | text */
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 12px;
   padding: 10px 12px;

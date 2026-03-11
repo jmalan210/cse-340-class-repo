@@ -7,10 +7,10 @@
 <ul>
     <% organizations.forEach(organization => { %>
         <li>
-            <img src="/images/<%= organization.logo_filename %>" alt=""<%= organization.name %> logo">
+            <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
             <strong><%= organization.name%></strong>
-            <%= organization.description%><br>
-            :<%= organization.contact_email %>
+            <%= organization.description%><br><br>
+            <%= organization.contact_email %><br>
         
         </li>
         <%
