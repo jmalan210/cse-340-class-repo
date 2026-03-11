@@ -14,6 +14,8 @@ values
 ('GreenHarvest Growers', 'An urban farming collective promoting food sustainability and education in local neighborhoods.', 'contact@greenharvest.org', 'greenharvest-logo.png'),
 ('UnityServe Volunteers', 'A volunteer coordination group supporting local charities and service initiatives.', 'hello@unityserve.org', 'unityserve-logo.png');
 
+-- Service Projects Table
+
 create table service_projects (
 project_id serial primary key,
 organization_id int not null,
@@ -54,3 +56,73 @@ VALUES (1, 'Argonaut Planter Boxes', 'We will build planter boxes at Argonaut El
 	(3, 'Book Donation Campaign', 'We will collect and donate books to underprivileged children', 'Local Library', '2027-02-15'),
 	
 	(3, 'Toys for Tots Drive', 'We will organize a toy drive to provide gifts for children in need during the holidays', 'City Hall', '2027-03-01');
+
+-- Categories Table 
+
+create table categories (
+category_id SERIAL Primary Key,
+name varchar(150) not null
+);
+
+insert into categories (name)
+values
+('Environmental'),
+('Educational'),
+('Community Service'),
+('Health and Wellness'),
+('Children'),
+('Gardening'),
+('Drives');
+
+-- Service Project Categories (linking) Table
+
+create table service_project_categories (
+	project_id int not null,
+	category_id int not null,
+	foreign key(project_id) references service_projects(project_id),
+	foreign key (category_id) references categories(category_id));
+
+insert into service_project_categories (project_id, category_id)
+values
+(1,1),
+(1,2),
+(1,3),
+(1,5),
+(1,6),
+(2,1),
+(2,3),
+(2,5),
+(3,3),
+(3,5),
+(4,3),
+(4,6),
+(5,2),
+(5,3),
+(5,5),
+(6,1),
+(6,2),
+(6,3),
+(6,6),
+(7,1),
+(7,6),
+(8,2),
+(8,5),
+(8,6),
+(9,3),
+(9,6),
+(10,1),
+(10,6),
+(11,3),
+(11,4),
+(12,3),
+(12,7),
+(13,3),
+(13,4),
+(14,2),
+(14,3),
+(14,5),
+(14,7),
+(15,3),
+(15,5),
+(15,7);
+
