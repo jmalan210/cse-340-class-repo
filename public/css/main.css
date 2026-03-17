@@ -299,7 +299,7 @@ a:hover { color: var(--navy); text-decoration-color: var(--gold); }
 /* 4) Content lists: alternate row background & stronger markers */
 main > ul { 
   background: #fff;
-  border: 1px solid var(--border);
+
   border-radius: 10px;
   
 }
