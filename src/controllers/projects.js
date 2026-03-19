@@ -1,3 +1,4 @@
+import { getProjectCategories } from '../models/categories.js';
 import { getAllProjects, getUpComingProjects, getProjectDetails } from '../models/projects.js'
 // console.log('Projects controller loaded'); 
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
@@ -15,8 +16,9 @@ const showProjectDetailsPage = async (req, res) => {
     // console.log(id)
     const projectDetails = await getProjectDetails(id);
     // console.log(projectDetails);
+    const categories = await getProjectCategories(id);
     const title = 'Project Details';
-    res.render('project', { title, projectDetails });
+    res.render('project', { title, projectDetails, categories });
 
     // console.log('Project details route hit');
 }

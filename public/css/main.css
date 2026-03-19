@@ -166,26 +166,28 @@ main {
 
 /* ===== Organizations page: media-style list ===== */
 /* Targets any UL inside <main> to format logo + name + email cleanly */
-main > ul {
-  list-style: none;                 /* no bullets for the org list */
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-            /* vertical spacing between items */
-}
 
-main > ul > li {
+ main > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+} /*keep*/
+
+
+
+  main > ul > li {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin: 0 auto;
- 
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
+  max-height: 150px;   /* 👈 makes them equal height */
+  padding: 12px;
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+} /*keep*/
 
 main > ul > li img {
   width: 52px;                      /* consistent logo size */
@@ -195,6 +197,7 @@ main > ul > li img {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px;
+  
 }
 
 main > ul > li strong {
@@ -202,10 +205,7 @@ main > ul > li strong {
   font-weight: 800;
 }
 
-/* Email text that follows the org name stays readable */
-main > ul > li {
-  color: var(--text);
-}
+
 
 /* Make the email address stand out slightly */
 main > ul > li :is(a, span, em) {
@@ -224,24 +224,12 @@ main > h2 {
   font-weight: 700;
 }
 
-/* The "Upcoming Service Projects" list (keeps bullets, adds brand polish) */
-main > ul {
-  margin: .5rem 0 0;
-}
-
-main > ul > li {
-  margin: .4rem 0;          /* vertical rhythm */
-  line-height: 1.55;
-}
 
 
 
 
-/* Optional: subtle divider under the list for a tidy stop */
-main > ul {
-  border-bottom: 1px solid var(--border);
-  padding-bottom: .75rem;
-}
+
+
 /* ===== Categories page: simple, readable list (palette-aware) ===== */
 
 /* Subheading spacing & color (under H1) */
@@ -253,10 +241,6 @@ main > h2 {
 
 
 
-main > ul > li {
-  margin: .4rem 0;             /* comfortable vertical rhythm */
-  line-height: 1.55;
-}
 
 
 /* =========================================================
@@ -293,26 +277,39 @@ main::before {
 }
 
 /* 3) Body links: stronger palette presence */
-a { color: var(--teal); text-decoration-color: color-mix(in srgb, var(--teal) 65%, transparent); }
-a:hover { color: var(--navy); text-decoration-color: var(--gold); }
+a { color: var(--teal); 
+  text-decoration: none; 
+}
+a:hover { color: var(--navy); 
+  text-decoration-color: var(--gold); 
+}
 
 /* 4) Content lists: alternate row background & stronger markers */
-main > ul { 
-  background: #fff;
 
-  border-radius: 10px;
-  
-}
 
 .card {
   margin: 10px;
   width: 90%;
   
 }
-main > ul > li {
-  padding: .4rem .25rem;
-  border-radius: 8px;
+
+.category-card {
+  height: 100px;
 }
+.tag-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+  background-color: transparent;
+  border: none;
+}
+.tag {
+  font-size: small;
+  border: 1px solid var(--navy);
+
+}
+
 main > ul > li:nth-child(odd) { background: rgba(10,183,167,.06); }     /* teal tint */
 main > ul > li:nth-child(even){ background: rgba(255,193,21,.08); }     /* gold tint */
 main > ul > li::marker { color: var(--orange); }                        /* orange bullets */

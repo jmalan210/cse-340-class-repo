@@ -1,4 +1,4 @@
-import { getCategories } from "../models/categories.js";
+import { getCategories, getCategoryById, getProjectByCategory, getProjectCategories } from "../models/categories.js";
 
 const showCategoriesPage = async (req, res) => {
     const categories = await getCategories();
@@ -7,4 +7,13 @@ const showCategoriesPage = async (req, res) => {
     res.render('categories', { title, categories });
 };
 
-export {showCategoriesPage}
+const showCategoryDetailsPage = async (req, res) => {
+    const categoryId = req.params.id;
+    const projects = await getProjectByCategory(categoryId);
+    const categories = await getCategoryById(categoryId);
+    const category = categories[0];
+    const title = category.name;
+    res.render('category', { title, category, projects });
+}
+
+export {showCategoriesPage, showCategoryDetailsPage}

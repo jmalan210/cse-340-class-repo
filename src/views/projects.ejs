@@ -8,13 +8,14 @@
     <% upcomingProjects.forEach(upcomingProject => { %>
         <li class="card">
            
-            <strong><%= new Date(upcomingProject.project_date).toLocaleDateString('en-US', {
+            <p><strong><%= new Date(upcomingProject.project_date).toLocaleDateString('en-US', {
                 month: 'long', 
                 day: 'numeric', 
                 year: 'numeric'
-            }) %>:</strong>
+            }) %>:</strong></p>
 
-            <span><a href="/project/<%= upcomingProject.project_id %>"><%= upcomingProject.title%></a><br><a href="/organization/<%= upcomingProject.organization_id %>"><em>(<%= upcomingProject.name %>)</em></a></span>
+            <p><strong><a href="/project/<%= upcomingProject.project_id %>"><%= upcomingProject.title%></a></strong></p>
+                <p><a href="/organization/<%= upcomingProject.organization_id %>"><em>(<%= upcomingProject.name %>)</em></a></p>
         
         </li>
         <%

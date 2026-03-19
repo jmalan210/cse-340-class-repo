@@ -6,10 +6,15 @@
     <h1><%= title %></h1>
        
     <h2><%= projectDetails.title %></h2>
-    <p>Description: <%= projectDetails.description %></p>
-    <p>Date: <%= new Date(projectDetails.project_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></p>
-    <p>Location: <%= projectDetails.location %></p>
-    <p>Partner Organization: <a href="/organization/<%= projectDetails.organization_id %>"><%= projectDetails.name %></a> </p>
+    <p><strong>Description:</strong> <%= projectDetails.description %></p>
+    <p><strong>Date:</strong> <%= new Date(projectDetails.project_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></p>
+    <p><strong>Location:</strong> <%= projectDetails.location %></p>
+    <p><strong>Partner Organization:</strong> <a href="/organization/<%= projectDetails.organization_id %>"><%= projectDetails.name %></a> </p>
+    <ul class="tag-list">
+      <% categories.forEach(category => { %>
+         <li class="tag"><a href="/category/<%= category.category_id %>"><%= category.name %></a></li>
+     <% }) %>
+    </ul>
 
        </main>
     <%- include('partials/footer') %>
