@@ -1,3 +1,5 @@
+console.log('Server starting...');
+
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -15,9 +17,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-/**
-  * Configure Express middleware
-  */
+app.use((req, res, next) => {
+    console.log('Incoming request:', req.method, req.url);
+    next();
+});
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,13 +53,14 @@ app.use((req, res, next) => {
 })
 
 // Use the imported router to handle routes
-app.use(router);
+app.use (router);
 
 
 
 
 // Catch-all route for 404 errors
 app.use((req, res, next) => {
+    console.log('404 Not Found:', req.method, req.url);
     const err = new Error('Page Not Found');
     err.status = 404;
     next(err);

@@ -1,13 +1,17 @@
 <%- include('partials/header') %>
 
 <main>
+
+   <pre>
+<%= JSON.stringify(projectDetails, null, 2) %>
+</pre>
     <h1><%= title %></h1>
        
     <h2><%= projectDetails.title %></h2>
     <p>Description: <%= projectDetails.description %></p>
     <p>Date: <%= projectDetails.project_date %></p>
     <p>Location: <%= projectDetails.location %></p>
-    <p>Partner Organization: <a href="/organization/<%= projectDetails.project_id %>"><%= projectDetails.organization_name %></a> </p>
+    <p>Partner Organization: <a href="/organization/<%= projectDetails.organization_id %>"><%= projectDetails.name %></a> </p>
 
        </main>
     <%- include('partials/footer') %>
