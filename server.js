@@ -18,7 +18,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use((req, res, next) => {
-    console.log('Incoming request:', req.method, req.url);
+    // console.log('Incoming request:', req.method, req.url);
     next();
 });
 
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-    console.log(req.method, req.url);
+    // console.log(req.method, req.url);
     res.locals.appName = 'Partner Portal';
     res.locals.currentPath = req.path;
     next();

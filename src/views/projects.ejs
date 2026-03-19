@@ -14,7 +14,7 @@
                 year: 'numeric'
             }) %>:</strong>
 
-            <span><%= upcomingProject.title%> <em>(<%= upcomingProject.name %>)</em></span>
+            <span><a href="/project/<%= upcomingProject.project_id %>"><%= upcomingProject.title%></a><br><a href="/organization/<%= upcomingProject.organization_id %>"><em>(<%= upcomingProject.name %>)</em></a></span>
         
         </li>
         <%

@@ -59,7 +59,7 @@ const getUpComingProjects = async (number_of_projects) => {
   
   const query_params = [number_of_projects];
   const result = await db.query(query, query_params);
-  console.log(result.rows)
+  // console.log(result.rows)
   return result.rows;
 };
 
@@ -82,7 +82,7 @@ const getProjectDetails = async (id) => {
   
   const query_params = [id];
   const result = await db.query(query, query_params);
-  console.log(result.rows);
+  // console.log(result.rows);
   return result.rows[0];
 };
   

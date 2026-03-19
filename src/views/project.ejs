@@ -2,14 +2,12 @@
 
 <main>
 
-   <pre>
-<%= JSON.stringify(projectDetails, null, 2) %>
-</pre>
+   
     <h1><%= title %></h1>
        
     <h2><%= projectDetails.title %></h2>
     <p>Description: <%= projectDetails.description %></p>
-    <p>Date: <%= projectDetails.project_date %></p>
+    <p>Date: <%= new Date(projectDetails.project_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></p>
     <p>Location: <%= projectDetails.location %></p>
     <p>Partner Organization: <a href="/organization/<%= projectDetails.organization_id %>"><%= projectDetails.name %></a> </p>
 
