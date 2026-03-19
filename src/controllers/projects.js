@@ -11,12 +11,12 @@ const showProjectsPage = async (req, res) => {
 };
 
 const showProjectDetailsPage = async (req, res) => {
-    // const id = req.params.id;
-    // console.log(id)
-    // const projectDetails = await getProjectDetails(id);
-    // console.log(projectDetails);
-    // const title = 'Project Details';
-    // res.render('project', {title, projectDetails})
+    const id = req.params.id;
+    console.log(id)
+    const projectDetails = await getProjectDetails(id);
+    console.log(projectDetails);
+    const title = 'Project Details';
+    res.render('project', {title, projectDetails})
 
     console.log('Project details route hit');
 }
