@@ -8,8 +8,6 @@ const showOrganizationsPage = async (req, res) => {
     res.render('organizations', { title, organizations });
 };
 
-
-
 const showOrganizationDetailsPage = async (req, res) => {
     const organizationId = req.params.id;
     const organizationDetails = await getOrganizationDetails(organizationId);
@@ -30,6 +28,10 @@ const processNewOrganizationForm = async (req, res) => {
     const logoFilename = 'placeholder-logo.png'; // Use the placeholder logo for all new organizations
 
     const organizationId = await createOrganization(name, description, contactEmail, logoFilename);
+
+    // Set a success flash message
+    req.flash('success', 'Organization added successfully!');
+    
     res.redirect(`/organization/${organizationId}`);
 };
 
