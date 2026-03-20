@@ -310,6 +310,17 @@ a:hover { color: var(--navy);
 
 }
 
+.add-card {
+ display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 150px;   /* 👈 makes them equal height */
+  padding: 12px;
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+}
+
 main > ul > li:nth-child(odd) { background: rgba(10,183,167,.06); }     /* teal tint */
 main > ul > li:nth-child(even){ background: rgba(255,193,21,.08); }     /* gold tint */
 main > ul > li::marker { color: var(--orange); }                        /* orange bullets */
