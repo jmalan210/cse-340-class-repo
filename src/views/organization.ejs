@@ -4,6 +4,7 @@
     <h2><%= organizationDetails.name %></h2>
     <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
     <p>Description: <%= organizationDetails.description %></p>
+     <a href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a>
     <h3>Service Projects</h3>
     <ul>
         <% projects.forEach(project => { %>
@@ -11,6 +12,7 @@
             <a href="/project/<%= project.project_id %>">
             <%= project.title %>
             </a>
+           
     </li>
         <% 
         })
