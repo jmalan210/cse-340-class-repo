@@ -78,11 +78,11 @@ const showEditOrganizationForm = async (req, res) => {
     res.render('edit-organization', {title, organizationDetails});
 }
 
-const processEditOrganizationForm = async (req, req) => {
+const processEditOrganizationForm = async (res, req) => {
     const organizationId = req.params.id;
     const { name, description, contactEmail, logoFilename } = req.body;
 
-    await updateOrganization(organizationId, name, description, contactEmail, logoFilename);
+    await updateOrganization(name, description, contactEmail, logoFilename, organizationId);
 
     // Check for validation errors
     const results = validationResult(req);
