@@ -4,6 +4,7 @@ const getCategories = async() => {
     const query = `
         SELECT name, category_id
         FROM categories
+        ORDER BY name ASC
     `;
 
     const result = await db.query(query);
