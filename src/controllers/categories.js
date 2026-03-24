@@ -15,8 +15,8 @@ const categoryValidation = [
         .trim()
         .notEmpty()
         .withMessage('Category is required.')
-        .isLength({ min: 3, max: 200 })
-        .withMessage('Category must be between 3 and 200 characters.'),
+        .isLength({ min: 3, max: 100 })
+        .withMessage('Category must be between 3 and 100 characters.'),
     
 ];
 
@@ -81,7 +81,7 @@ const processAddCategoryForm = async (req, res) => {
     try {
 
         const category = await addCategory(name);
-    req.flash('New category successfully added!');
+    req.flash('success', 'New category successfully added!');
     res.redirect(`/category/${category}`);
     } catch (error) {
         console.error('Error creating new category:', error);
@@ -99,18 +99,20 @@ const showEditCategoryForm = async (req, res) => {
    
 };
 const processEditCategoryForm = async (req, res) => {
-    const errors = validationResult(req);
+    
     const category_id = req.params.id;
     const { name } = req.body;
 
+      const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.render('edit-category', {
-            title: 'Edit Category',
-            category: { id: category_id, name },
-            errors: errors.array()
+        // Loop through validation errors and flash them
+        errors.array().forEach((error) => {
+            req.flash('error', error.msg);
         });
-    }
 
+        // Redirect back to the new project form
+        return res.redirect(`/edit-category/${category_id}`);
+    }
     try {
         const category = await editCategory(category_id, name);
         req.flash('success', 'Category successfully edited!');
