@@ -4,7 +4,8 @@ import {
     getProjectByCategory,
     getProjectCategories,
     updateCategoryAssignments, 
-    addCategory
+    addCategory,
+    editCategory
 } from "../models/categories.js";
 import { getAllProjects, getProjectDetails } from "../models/projects.js";
 import { body, validationResult } from 'express-validator';
@@ -33,7 +34,7 @@ const showCategoryDetailsPage = async (req, res) => {
     const categories = await getCategoryById(categoryId);
     const category = categories[0];
     const title = category.name;
-    res.render('category', { title, category, projects });
+    res.render('category', { title, category, categories, projects });
 }
 
 const showAssignCategoriesForm = async (req, res) => {
@@ -87,9 +88,38 @@ const processAddCategoryForm = async (req, res) => {
         req.flash('error', 'There was an error creating the category.');
         res.redirect('/categories');
     }
-    
+}
 
+const showEditCategoryForm = async (req, res) => {
+   
+        const category_id = req.params.id;
+        const category = await getCategoryById(category_id);
+        const title = 'Edit Category';
+        res.render('edit-category', { title, category: category[0] });
+   
+};
+const processEditCategoryForm = async (req, res) => {
+    const errors = validationResult(req);
+    const category_id = req.params.id;
+    const { name } = req.body;
 
+    if (!errors.isEmpty()) {
+        return res.render('edit-category', {
+            title: 'Edit Category',
+            category: { id: category_id, name },
+            errors: errors.array()
+        });
+    }
+
+    try {
+        const category = await editCategory(category_id, name);
+        req.flash('success', 'Category successfully edited!');
+        res.redirect(`/category/${category.category_id}`);
+    } catch (error) {
+        console.error('Error editing category:', error);
+        req.flash('error', 'There was an error editing the category.');
+        res.redirect('/categories');
+    }
 }
     export {
         showCategoriesPage,
@@ -98,5 +128,7 @@ const processAddCategoryForm = async (req, res) => {
         processAssignCategoriesForm,
         showAddCategoryForm, 
         processAddCategoryForm, 
-        categoryValidation
+        showEditCategoryForm,
+        categoryValidation,
+        processEditCategoryForm
     }

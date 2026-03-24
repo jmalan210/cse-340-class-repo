@@ -111,11 +111,24 @@ const addCategory = async (name) => {
         return result.rows[0].category_id;
 }
 
+const editCategory = async (category_id, name) => {
+    const query = `
+    UPDATE categories set name = $1
+    WHERE category_id = $2
+    RETURNING category_id, name;
+    `;
+
+    const query_params = [name, category_id];
+    const result = await db.query(query, query_params);
+    return result.rows[0];
+}
+
 export {
     getCategories,
     getCategoryById,
     getProjectCategories,
     getProjectByCategory,
     updateCategoryAssignments, 
-    addCategory
+    addCategory, 
+    editCategory
 } 

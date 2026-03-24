@@ -27,7 +27,9 @@ import {
     processAssignCategoriesForm, 
     showAddCategoryForm, 
     processAddCategoryForm,
-    categoryValidation
+    categoryValidation,
+    showEditCategoryForm,
+    processEditCategoryForm
     
 } from './categories.js';
 
@@ -63,6 +65,9 @@ router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 
 router.get('/new-category', showAddCategoryForm);
 router.post('/new-category', categoryValidation, processAddCategoryForm);
+
+router.get('/edit-category/:id', showEditCategoryForm);
+router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
 
 
 
