@@ -24,7 +24,11 @@ import {
     showCategoriesPage,
     showCategoryDetailsPage,
     showAssignCategoriesForm, 
-    processAssignCategoriesForm
+    processAssignCategoriesForm, 
+    showAddCategoryForm, 
+    processAddCategoryForm,
+    categoryValidation
+    
 } from './categories.js';
 
 import { testErrorPage } from './errors.js';
@@ -56,6 +60,9 @@ router.post('/new-project', projectValidation, processNewProjectForm);
 
 router.get('/assign-categories/:projectId', showAssignCategoriesForm);
 router.post('/assign-categories/:projectId', processAssignCategoriesForm);
+
+router.get('/new-category', showAddCategoryForm);
+router.post('/new-category', categoryValidation, processAddCategoryForm);
 
 
 
