@@ -1,6 +1,15 @@
 import { getProjectCategories } from '../models/categories.js';
-import { getAllProjects, getUpComingProjects, getProjectDetails, createProject } from '../models/projects.js'
-import { getAllOrganizations } from '../models/organizations.js';
+import {
+    getAllProjects,
+    getUpComingProjects,
+    getProjectDetails,
+    createProject,
+    updateProject
+} from '../models/projects.js'
+import {
+    getAllOrganizations,
+    updateOrganization
+} from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
 
 // console.log('Projects controller loaded'); 
@@ -95,6 +104,40 @@ const processNewProjectForm = async (req, res) => {
     
 }
 
+const showEditProjectForm = async (req, res) => {
+    const projectId = req.params.id;
+    const projectDetails = await getProjectDetails(projectId);
+    const organizations = await getAllOrganizations();
+
+    const title = 'Edit Project';
+
+    res.render('edit-project', { title, projectDetails, organizations });
+    }
+
+const processEditProjectForm = async (req, res) => {
+    const projectId = req.params.id;
+    const { title, description, location, project_date, organizationId } = req.body;
+
+    await updateProject(title, description, location, project_date, organizationId, projectId);
+
+    // Check for validation errors
+    const results = validationResult(req);
+    if (!results.isEmpty()) {
+        // Validation failed - loop through errors
+        results.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+
+        // Redirect back to the edit organization form
+        return res.redirect('/edit-project/' + req.params.id);
+    }
+
+    req.flash('success', 'Project updated successfully!');
+
+    res.redirect(`/project/${projectId}`);
+
+
+}
 
 
 export {
@@ -102,5 +145,7 @@ export {
     showProjectDetailsPage,
     showNewProjectForm, 
     processNewProjectForm, 
-    projectValidation
+    projectValidation,
+    showEditProjectForm,
+    processEditProjectForm
 }

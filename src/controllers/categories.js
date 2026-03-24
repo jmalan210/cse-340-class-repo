@@ -10,7 +10,7 @@ import { getProjectDetails } from "../models/projects.js";
 
 const showCategoriesPage = async (req, res) => {
     const categories = await getCategories();
-    console.log(categories);
+    // console.log(categories);
     const title = "Categories";
     res.render('categories', { title, categories });
 };

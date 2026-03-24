@@ -79,8 +79,8 @@ const showEditOrganizationForm = async (req, res) => {
 }
 
 const processEditOrganizationForm = async (req, res) => {
-    console.log('params:', req.params);
-    console.log('body:', req.body);
+    // console.log('params:', req.params);
+    // console.log('body:', req.body);
     const organizationId = req.params.id;
     const logoFilename = req.body['logo-file'] || 'placeholder-logo.png';
     const { name, description, contactEmail } = req.body;
