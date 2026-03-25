@@ -85,7 +85,7 @@ const processEditOrganizationForm = async (req, res) => {
     const logoFilename = req.body['logo-file'] || 'placeholder-logo.png';
     const { name, description, contactEmail } = req.body;
 
-    await updateOrganization(name, description, contactEmail, logoFilename, organizationId);
+    
 
     // Check for validation errors
     const results = validationResult(req);
@@ -98,6 +98,8 @@ const processEditOrganizationForm = async (req, res) => {
         // Redirect back to the edit organization form
         return res.redirect('/edit-organization/' + req.params.id);
     }
+
+    await updateOrganization(name, description, contactEmail, logoFilename, organizationId);
 
     req.flash('success', 'Organization updated successfully!');
 
