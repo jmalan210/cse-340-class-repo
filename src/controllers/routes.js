@@ -61,7 +61,7 @@ router.get('/new-project', showNewProjectForm);
 router.post('/new-project', projectValidation, processNewProjectForm);
 
 router.get('/assign-categories/:projectId', showAssignCategoriesForm);
-router.post('/assign-categories/:projectId', categoryValidation, processAssignCategoriesForm);
+router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 
 router.get('/new-category', showAddCategoryForm);
 router.post('/new-category', categoryValidation, processAddCategoryForm);
