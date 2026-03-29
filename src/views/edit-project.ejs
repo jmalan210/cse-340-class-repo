@@ -43,7 +43,7 @@
         id="project_date"
         name="project_date"
         maxlength="255"
-        value="<%= projectDetails.project_date %>"
+        value="<%= projectDetails.project_date ? projectDetails.project_date.toISOString().split('T')[0] : '' %>"
         />
 
     </div>
@@ -58,7 +58,9 @@
       >
       <option value="">Select partner organization</option>
       <% organizations.forEach(org => { %>
-        <option value="<%= org.organization_id %>"><%= org.name %></option>
+        <option value="<%= org.organization_id %>" 
+          <%= org.organization_id === projectDetails.organization_id ? 'selected' : '' %>>
+          <%= org.name %></option>
      <% }); %>
       </select>
     </div>
