@@ -33,6 +33,11 @@ import {
     
 } from './categories.js';
 
+import {
+    showUserRegistrationForm, 
+    processUserRegistrationForm
+} from './users.js'
+
 import { testErrorPage } from './errors.js';
 
 import { projectValidation } from './projects.js';
@@ -68,6 +73,9 @@ router.post('/new-category', categoryValidation, processAddCategoryForm);
 
 router.get('/edit-category/:id', showEditCategoryForm);
 router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
+
+router.get('/register', showUserRegistrationForm);
+router.post('/register', processUserRegistrationForm);
 
 
 
