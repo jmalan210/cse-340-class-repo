@@ -38,7 +38,9 @@ import {
     processUserRegistrationForm, 
     showLoginForm, 
     processLoginForm, 
-    processLogout
+    processLogout, 
+    requireLogin,
+    showDashboard
 } from './users.js'
 
 import { testErrorPage } from './errors.js';
@@ -84,6 +86,9 @@ router.get('/login', showLoginForm);
 router.post('/login', processLoginForm);
 
 router.get('/logout', processLogout);
+
+router.get('/dashboard', requireLogin, showDashboard);
+
 
 
 
