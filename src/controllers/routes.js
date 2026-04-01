@@ -35,7 +35,10 @@ import {
 
 import {
     showUserRegistrationForm, 
-    processUserRegistrationForm
+    processUserRegistrationForm, 
+    showLoginForm, 
+    processLoginForm, 
+    processLogout
 } from './users.js'
 
 import { testErrorPage } from './errors.js';
@@ -76,6 +79,11 @@ router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
 
 router.get('/register', showUserRegistrationForm);
 router.post('/register', processUserRegistrationForm);
+
+router.get('/login', showLoginForm);
+router.post('/login', processLoginForm);
+
+router.get('/logout', processLogout);
 
 
 
