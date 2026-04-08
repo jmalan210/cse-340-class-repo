@@ -156,6 +156,30 @@ const removeVolunteer = async (user_id, project_id) => {
 
   
 }
+
+const getAllVolunteeredProjects = async (user_id) => {
+  const query = `
+  SELECT
+  u.name,
+  s.title,
+  s.location,
+  s.project_date,
+  s.project_id
+  FROM users u
+  JOIN volunteering v
+  ON u.user_id = v.user_id
+  JOIN service_projects s
+  ON v.project_id = s.project_id
+  WHERE u.user_id = $1
+  ORDER BY s.project_date
+  
+  `;
+
+  const query_params = [user_id];
+  const result = await db.query(query, query_params);
+  return result.rows;
+
+}
   
 
 export {
@@ -166,5 +190,6 @@ export {
   createProject, 
   updateProject, 
   volunteerForProject,
-  removeVolunteer
+  removeVolunteer, 
+  getAllVolunteeredProjects
 } 

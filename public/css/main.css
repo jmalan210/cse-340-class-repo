@@ -183,7 +183,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-height: 150px;   /* 👈 makes them equal height */
+  max-height: 400px;   /* 👈 makes them equal height */
   padding: 12px;
   border: 2px solid var(--navy);
   border-radius: 8px;
@@ -290,11 +290,12 @@ a:hover { color: var(--navy);
 .card {
   margin: 10px;
   width: 90%;
+  position: relative;
   
 }
 
 .category-card {
-  height: 100px;
+  height: 200px;
 }
 .tag-list {
   display: flex;
@@ -346,6 +347,53 @@ hr {
   background: linear-gradient(90deg, var(--teal), var(--gold), var(--orange));
   border-radius: 2px;
 }
+
+form {
+ display: flex;
+ flex-direction: column;
+ 
+ margin-bottom: 10px;
+  }
+
+  text-area {
+    
+  }
+
+  label {
+    width: 100%;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  input {
+    flex: 1;
+    padding: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 10px;
+    border-radius: 10px;
+    
+  }
+
+button {
+  border: var(--navy);
+  background-color: var(--teal);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 15px;
+  width: 100%;
+  color: white;
+  font-weight: bolder;
+}
+
+#volunteer-remove {
+  position: absolute;
+  width: 25%;
+  bottom: -25px;
+  right: -20px;
+  font-size: x-small;
+}
+
 
 /* 8) Footer: add a slim gradient stripe on top and brand links */
 footer {

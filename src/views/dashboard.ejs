@@ -2,8 +2,9 @@
 <main>
     <h1><%= title %></h1>
     <h2>Dashboard</h2>
-    <p>Name: <%= name %></p>
-    <p>Username: <%= email %></p>
+    <p><strong>Name:</strong> <%= name %></p>
+    <p><strong>Username:</strong> <%= email %></p>
+    <a href="/volunteering">See your volunteering list.</a>
 
      <% if (user && user.role_name === 'admin') { %>
    <a href="/users">See User List</a>

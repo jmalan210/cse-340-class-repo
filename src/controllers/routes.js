@@ -18,7 +18,9 @@ import {
     processNewProjectForm,
     showEditProjectForm,
     processEditProjectForm, 
-    toggleVolunteer
+    toggleVolunteer,
+    showVolunteeringPage,
+    removeVolunteerProject
 } from './projects.js';
 
 import {
@@ -49,6 +51,7 @@ import {
 import { testErrorPage } from './errors.js';
 
 import { projectValidation } from './projects.js';
+import { removeVolunteer } from '../models/projects.js';
 
 
 const router = express.Router();
@@ -96,6 +99,9 @@ router.get('/logout', processLogout);
 router.get('/dashboard', requireLogin, showDashboard);
 
 router.get('/users', requireRole('admin', '/dashboard'), displayUserPage);
+
+router.get('/volunteering', requireLogin, showVolunteeringPage);
+router.post('/volunteering/remove', requireLogin, removeVolunteerProject);
 
 
 

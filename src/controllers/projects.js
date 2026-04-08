@@ -6,7 +6,8 @@ import {
     createProject,
     updateProject, 
     volunteerForProject, 
-    removeVolunteer
+    removeVolunteer, 
+    getAllVolunteeredProjects
 } from '../models/projects.js'
 import {
     getAllOrganizations,
@@ -146,14 +147,11 @@ const processEditProjectForm = async (req, res) => {
     req.flash('success', 'Project updated successfully!');
 
     res.redirect(`/project/${projectId}`);
-
-
 }
 
-
 const toggleVolunteer = async (req, res) => {
-    console.log('req.session.user:', req.session.user);
-    console.log('req.session.user.user_id:', req.session.user?.id);
+    // console.log('req.session.user:', req.session.user);
+    // console.log('req.session.user.user_id:', req.session.user?.id);
 
     if (!req.session.user) {
         req.flash('error', 'You must be logged in to volunteer.');
@@ -179,6 +177,34 @@ const toggleVolunteer = async (req, res) => {
     }
 }
 
+const showVolunteeringPage = async (req, res) => {
+    if (!req.session.user) {
+        req.flash('error', 'You must be logged in to see this page.');
+        return res.redirect('/login');
+        }
+        const user_id = req.session.user.user_id;
+        const title = 'Volunteering List';
+        const projects = await getAllVolunteeredProjects(user_id);
+        res.render('volunteering', {title, projects});
+    
+}
+ 
+const removeVolunteerProject = async (req, res) => {
+    try {
+        const user_id = req.session.user.user_id;
+        const project_id = req.body.project_id;
+
+        await removeVolunteer(user_id, project_id);
+
+        req.flash('success', 'Project removed from volunteering list.');
+
+        res.redirect('/volunteering');
+    } catch (error) {
+        console.error('Error removing volunteer', error);
+        req.flash('error', 'Unable to remove project.');
+        res.redirect('/volunteering');
+            }
+}
 
     export {
         showProjectsPage,
@@ -188,6 +214,8 @@ const toggleVolunteer = async (req, res) => {
         projectValidation,
         showEditProjectForm,
         processEditProjectForm, 
-        toggleVolunteer
+        toggleVolunteer,
+        showVolunteeringPage, 
+        removeVolunteerProject
     }
     

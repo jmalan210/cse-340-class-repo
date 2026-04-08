@@ -1,0 +1,28 @@
+ <%- include('partials/header') %>
+ <main>
+    <h1><%= title %></h1>
+    
+    <% if (projects.length > 0) { %>
+    <ul>
+        <% projects.forEach(project => { %>
+        <li class="card">
+            <p><strong>Title:</strong> <%=project.title %></p>
+            <p><strong>Location:</strong> <%=project.location %></p>
+            <p><strong>Date:</strong> <%= new Date(project.project_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></p>
+            <form action="/volunteering/remove" method="POST">
+                <input 
+                type="hidden"
+                name="project_id"
+                value="<%= project.project_id %>"
+                >
+                <button type="submit" id="volunteer-remove">Remove</button>
+            </form>
+        </li>
+      <%  }) %>
+    </ul>
+
+    <% } else { %>
+        <p>No projects to display</p>
+    <% } %>
+ </main>
+ <%- include('partials/footer') %>
