@@ -144,3 +144,10 @@ password_hash varchar(255) not null,
 role_id int references roles(role_id),
 created_at timestamp default current_timestamp
 );
+
+create table volunteering (
+user_id int not null,
+project_id int not null,
+foreign key(user_id) references users(user_id),
+foreign key (project_id) references service_projects(project_id)
+);

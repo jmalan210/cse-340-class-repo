@@ -17,7 +17,8 @@ import {
     showNewProjectForm,
     processNewProjectForm,
     showEditProjectForm,
-    processEditProjectForm
+    processEditProjectForm, 
+    toggleVolunteer
 } from './projects.js';
 
 import {
@@ -56,7 +57,10 @@ router.get('/', showHomePage);
 router.get('/organizations', showOrganizationsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
 router.get('/projects', showProjectsPage);
+
 router.get('/project/:id', showProjectDetailsPage);
+router.post('/project/:id/volunteer', toggleVolunteer);
+
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetailsPage);
 
@@ -92,6 +96,8 @@ router.get('/logout', processLogout);
 router.get('/dashboard', requireLogin, showDashboard);
 
 router.get('/users', requireRole('admin', '/dashboard'), displayUserPage);
+
+
 
 
 

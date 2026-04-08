@@ -100,6 +100,8 @@ const displayUserPage = async (req, res) => {
     const title = "User List";
     res.render('users', { title, users });
 }
+
+
 export {
     showUserRegistrationForm,
     processUserRegistrationForm, 

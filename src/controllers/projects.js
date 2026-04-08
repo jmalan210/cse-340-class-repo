@@ -4,13 +4,16 @@ import {
     getUpComingProjects,
     getProjectDetails,
     createProject,
-    updateProject
+    updateProject, 
+    volunteerForProject, 
+    removeVolunteer
 } from '../models/projects.js'
 import {
     getAllOrganizations,
     updateOrganization
 } from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
+import { checkIfVolunteer } from '../models/users.js';
 
 // console.log('Projects controller loaded'); 
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
@@ -57,12 +60,19 @@ const showProjectsPage = async (req, res) => {
 
 const showProjectDetailsPage = async (req, res) => {
     const id = req.params.id;
-    // console.log(id)
-    const projectDetails = await getProjectDetails(id);
+    const user = req.session.user;
+   
+    let isVolunteer = false;
+
+    if (user) {
+        isVolunteer = await checkIfVolunteer(user.user_id, id);
+        console.log('isVolunteer after DB check:', isVolunteer);
+    }
+     const projectDetails = await getProjectDetails(id);
     // console.log(projectDetails);
     const categories = await getProjectCategories(id);
     const title = 'Project Details';
-    res.render('project', { title, projectDetails, categories });
+    res.render('project', { title, projectDetails, user, categories, isVolunteer });
 
     // console.log('Project details route hit');
 }
@@ -141,12 +151,43 @@ const processEditProjectForm = async (req, res) => {
 }
 
 
-export {
-    showProjectsPage,
-    showProjectDetailsPage,
-    showNewProjectForm, 
-    processNewProjectForm, 
-    projectValidation,
-    showEditProjectForm,
-    processEditProjectForm
+const toggleVolunteer = async (req, res) => {
+    console.log('req.session.user:', req.session.user);
+    console.log('req.session.user.user_id:', req.session.user?.id);
+
+    if (!req.session.user) {
+        req.flash('error', 'You must be logged in to volunteer.');
+        return res.redirect('/login');
+        }
+        const project_id = req.params.id;
+        const user_id = req.session.user.user_id;
+    try {
+        const isVolunteer = await checkIfVolunteer(user_id, project_id);
+        if (isVolunteer) {
+            await removeVolunteer(user_id, project_id);
+            req.flash('success', 'You have removed your volunteer status.');
+        } else {
+            await volunteerForProject(user_id, project_id);
+            req.flash('success', 'You have volunteered ')
+        }
+
+        res.redirect(`/project/${project_id}`);
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Something went wrong.');
+        res.redirect(`/project/${project_id}`);
+    }
 }
+
+
+    export {
+        showProjectsPage,
+        showProjectDetailsPage,
+        showNewProjectForm,
+        processNewProjectForm,
+        projectValidation,
+        showEditProjectForm,
+        processEditProjectForm, 
+        toggleVolunteer
+    }
+    

@@ -16,6 +16,12 @@
      <% }) %>
     </ul>
 
+    <% if (user) { %>
+        <form action="/project/<%= projectDetails.project_id %>/volunteer" method="POST">
+        <button type="submit" id="volunteer-link"><%= isVolunteer? "Remove" : "Volunteer" %></button>
+        </form>
+      <% } %>
+      
      <% if (user && user.role_name === 'admin') { %>
    <a href="/edit-project/<%= projectDetails.project_id %>">Edit Project</a>
     <a href="/assign-categories/<%= projectDetails.project_id %>">Edit Categories</a>

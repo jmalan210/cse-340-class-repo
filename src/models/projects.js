@@ -130,6 +130,32 @@ const updateProject = async (title, description, location, project_date, organiz
 
   return result.rows[0].projectId;
 }
+
+const volunteerForProject = async (user_id, project_id) => {
+ 
+    const query = `
+  INSERT INTO volunteering (user_id, project_id)
+  VALUES ($1, $2)
+  `;
+
+    const query_params = [user_id, project_id];
+    await db.query(query, query_params);
+   
+  
+};
+
+const removeVolunteer = async (user_id, project_id) => {
+
+  const query = `
+  DELETE FROM volunteering
+  WHERE user_id = $1
+  AND project_id = $2
+  `;
+  const query_params = [user_id, project_id];
+  await db.query(query, query_params);
+
+  
+}
   
 
 export {
@@ -138,5 +164,7 @@ export {
   getUpComingProjects,
   getProjectDetails,
   createProject, 
-  updateProject
+  updateProject, 
+  volunteerForProject,
+  removeVolunteer
 } 

@@ -72,8 +72,22 @@ const displayUsers = async () => {
 
     return result.rows;
 }
+
+const checkIfVolunteer = async (user_id, project_id) => {
+    const query = `
+        SELECT *
+        FROM volunteering
+        WHERE user_id = $1 AND project_id = $2
+    `;
+
+    const query_params = [user_id, project_id];
+    const result = await db.query(query, query_params);
+    return result.rowCount > 0;
+    
+}
 export {
     createUser,
     authenticateUser,
-    displayUsers
+    displayUsers, 
+    checkIfVolunteer
 };
